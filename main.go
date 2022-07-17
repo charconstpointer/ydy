@@ -8,7 +8,7 @@ import (
 )
 
 func main() {
-	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+	http.HandleFunc("/", func(w http.ResponseWriter, _ *http.Request) {
 		tmpl := `
 		<!DOCTYPE html>
 		<html lang="en">
