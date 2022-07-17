@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"io"
 	"log"
 	"net"
@@ -39,9 +40,11 @@ func (s *server) handleConn(conn net.Conn) {
 		log.Fatalf("failed to read 3 bytes")
 	}
 	if string(b) != publishCMD {
+		fmt.Println("establishing tunnel between, ", conn.RemoteAddr(), "and", conn.LocalAddr())
 		io.Copy(s.downstream, conn)
 		go io.Copy(conn, s.downstream)
 	} else {
+		fmt.Println("adding new downstream", conn.RemoteAddr())
 		s.downstream = conn
 	}
 }
